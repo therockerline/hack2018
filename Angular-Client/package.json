@@ -1,0 +1,11 @@
+{
+  "name": "angular-client",
+  "version": "1.0.0",
+  "description": "initial repo angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "therockerline",
+  "license": "ISC"
+}
