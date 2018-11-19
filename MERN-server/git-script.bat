@@ -1,3 +1,6 @@
 git commit -m "messaggio"
-git add .
+git pull
 git push origin master
+
+
+

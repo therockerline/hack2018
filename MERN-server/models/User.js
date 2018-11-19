@@ -19,10 +19,6 @@ var UserSchema = new Schema({
     type: String,
     default: "subscriber"
   },
-  image: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true

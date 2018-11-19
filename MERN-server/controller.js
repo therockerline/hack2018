@@ -31,7 +31,7 @@ module.exports = function(app) {
       .withMessage("Email is required")
       .isEmail()
       .withMessage("Email should be an email address"),
-    check("nome")
+    check("firstname")
       .not()
       .isEmpty()
       .withMessage("First name is required")
@@ -39,7 +39,7 @@ module.exports = function(app) {
       .withMessage("Name should be at least 2 letters")
       .matches(/^([A-z]|\s)+$/)
       .withMessage("Name cannot have numbers"),
-    check("cognome")
+    check("lastname")
       .not()
       .isEmpty()
       .withMessage("Last name is required")
@@ -62,7 +62,7 @@ module.exports = function(app) {
       "Password confirmation  is required or should be the same as password"
     ).custom(function(value, { req }) {
     if (value !== req.body.password) {
-        throw new Error("Password don't match");
+      throw new Error(req.body);
     }
     return value;
     }),
@@ -82,7 +82,7 @@ function addPost(req, res) {
     }
     var post = new Post(req.body);
     if (req.session.user) {
-      if (req.session.user.role == "admin") {
+      if (req.session.user.role == "subscriber") {
       post.user = req.session.user._id;
       post
         .save()
@@ -117,9 +117,9 @@ function register(req, res){
 
 function isLoggedIn(req, res, next) {
     if (req.session.isLoggedIn) {
-      res.send(true);
+      next();
     } else {
-      res.send(false);
+    res.send('You are not logged in');
     }
 }
 
@@ -130,7 +130,7 @@ function loginUser(req, res) {
     }
     User.findOne({
       email: req.body.email,
-      role: req.body.role
+      role: 'subscriber'
     })
       .then(function(user) {
         if (!user) {
@@ -215,7 +215,7 @@ res.json("sdasdsa");
 }
 
 app.get("/", example);
-app.get("/info", provideInfo);
+app.get("/info");
 app.post("/api/register", regValidation, register);
 app.post("/api/login", logValidation, loginUser);
 app.get("/api/account", isLoggedIn);
@@ -225,7 +225,7 @@ app.post("/api/add/post", isLoggedIn, postValidation, addPost);
 app.post("/api/del/post/id", isLoggedIn);
 app.post("/api/mod/post/id", isLoggedIn);
 app.post("/api/add/post/id/to/user/id" , isLoggedIn);
-app.post("api/user/id", isLoggeIn);
+app.post("api/user/id", isLoggedIn);
 app.post("/api/users", isLoggedIn);
 app.post("/api/search/post", isLoggedIn);
 app.post("/api/post/id", isLoggedIn);
