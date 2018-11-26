@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "server": "nodemon server"
+    "start": "npx nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +18,16 @@
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "express-fileupload": "^1.0.0",
     "express-session": "^1.15.6",
     "express-validator": "^5.1.2",
-    "express-fileupload": "^1.0.0",
+    "fs-extra": "^7.0.1",
     "mongoose": "^5.0.17",
-    "cookie-parser": "^1.4.3"
+    "multer": "^1.4.1",
+    "node-where": "^1.1.0"
   },
   "bugs": {
     "url": "https://github.com/therockerline/hack2018/issues"
